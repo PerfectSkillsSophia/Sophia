@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% if user.is_authenticated %}
+
+<!-- Quostion and Assessment View -->
+<div class="container" style="margin-top: 15px;">
+  <div class="row">
+    <div class="col-md-6">
+      <h5> Assessment Name:<span id="assname"> {{ assname }}</span></h5>
+    </div>
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-2">
+    </div>
+
+  </div>
+</div>
+<div class="container">
+  {% for i in question %}
+  <div class="grid" style=" display: none;">
+    <h3>Question: {{ i }}</h3>
+  </div>
+  {% endfor %}
+  <hr>
+</div>
+<!-- Video View -->
+
+<div class="container borde" style="margin-top: 10px;">
+  <div class="row">
+    <div class="col-md-6">
+      <code>Video will appear here</code>
+      <video class="embed-responsive embed-responsive-16by9" id="gum" playsinline autoplay muted></video>
+    </div>
+    <div class="col-md-6" style="margin-top:30px ;">
+      <h5>Instructions on how to use the platform.</h5>
+      <ol>
+
+        <li>Click <span class="text-success">Start</span> to start your video streaming</li>
+        <li>Click <span class="text-success">Record</span> to start video recording</li>
+        <li>Click <span class="text-success">Review</span> to review your recorded answer</li>
+        <li>Click <span class="text-success">Submit</span> to submit your video assessment</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="container" style="margin-top: 10px;">
+  <div class="row" >  
+
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-2"></div>
+    <div class="col-md-2"><button class="btn btn-primary" style="padding: 10px; margin-top: 10px;" onclick="showNext()">Next</button></div>
+    <div class="col-md-2"></div>
+    <div class="col-md-2"><button class="btn btn-primary" style="padding: 10px; margin: 10px;" onclick="showPrev()">Previous</button></div>
+    <div class="col-md-2"></div>
+  </div></div>
+    <div class="col-md-6"></div>
+  </div>
+
+</div>
+</div>
+
+<!-- Action View -->
+<div class="container" style="margin-top: 10px;">
+  <div class="row">
+    <div class="col-md-12">
+      <button class="btn btn-primary" style="padding: 10px; margin: 10px;" id="start">Start</button>
+      <button class="btn btn-primary" style="padding: 10px; margin: 10px;" id="record" disabled>Record</button>
+
+      <button class="btn btn-primary" style="padding: 10px; margin: 10px;" id="play" disabled>Review</button>
+      <button class="btn btn-primary" style="padding: 10px; margin: 10px;" id="upload" disabled>Submit</button>
+      <a class="btn btn-primary" id="exit" href="{% url 'feedback' %}" role="button"
+        style="visibility: hidden;padding: 10px; margin: 10px; ">Exit Assessment</a>
+      <div>
+        <label for="vehicle1" style="visibility: hidden;">Echo cancellation:</label>
+        <input type="checkbox" style="visibility: hidden;" id="echoCancellation"><br>
+      </div>
+    </div>
+    <div class="col-md-6">
+    </div>
+  </div>
+</div>
+<hr>
+
+
+{% endif %}
+{% endblock %}

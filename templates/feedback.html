@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="jumbotron">
+  <h4 class="d-flex align-items-center justify-content-center" style="padding: 10px;">Rate the interview experience out
+    of using options below</h4>
+  <div class="d-flex align-items-center justify-content-center">
+    <img src="{% static 'image/PSIMG.png' %}" style="height: 250px;width: 500px;" alt="Sample image">
+  </div>
+  <hr class="my-4">
+  <div class="d-flex align-items-center justify-content-center">
+    <form method="post">
+      {% csrf_token %}
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <button type="submit" class="btn btn-danger btn-lg btn-block" name="feedback_type"
+              value="Improment Needed">Improment Needed</button>
+          </div>
+          <div class="col-sm">
+            <button type="submit" class="btn btn-primary btn-lg btn-block" name="feedback_type"
+              value="Good">Good</button>
+          </div>
+          <div class="col-sm">
+            <button type="submit" class="btn btn-success btn-lg btn-block" name="feedback_type"
+              value="Could be Better">Could be Better</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="jumbotron text-center" style="background-color: rgba(0, 217, 255, 0.055); margin-top: 100px;">
+    <h1 class="display-3">Thank You!</h1>
+    <p class="lead"><strong></strong></p>
+    <hr>
+
+    <p class="lead">
+        <h3>Logout yourself!</h3>
+      <a class="btn btn-primary btn-lg"  href="{% url 'logout' %}" role="button">Logout</a>
+    </p>
+  </div>
+
+  {% endblock %}
