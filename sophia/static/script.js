@@ -44,21 +44,14 @@ uploadButton.addEventListener('click', () => {
     uploadButton.disabled = true    
     startButton.disabled = true   
     recordButton.disabled = true   
-
-
-
-
-
     const blob = new Blob(recordedBlobs, { type: 'video/mp4' });
     const videoUrl = window.URL.createObjectURL(blob);
-
     var fd = new FormData();
     fd.append('fileName', uName);
     //fd.append('fileName', 'test.mp4');
     fd.append('data', blob);
     fd.append('assessmentName', ass)
     fd.append('videoUrl',videoUrl)
-
     $.ajax({
         type: 'POST',
         url: 'fileUpload/',
@@ -84,7 +77,6 @@ function showDiv()
   $(".grid:eq("+ visibleDiv +")").show();
 }
 showDiv()
-
 function showNext()
 {
 if(visibleDiv== $(".grid").length-1)
@@ -96,8 +88,6 @@ else {
 }
 showDiv();
 }
-
-
 function showPrev()
 {
 if (visibleDiv == 0)
