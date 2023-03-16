@@ -27,7 +27,7 @@
                 </div>
                 <div class="card-body">
                     <div class="alert alert-primary" role="alert">
-                        http://127.0.0.1:8000/assessments/welcome/{{ assessment.assessmentName }}<br>
+                        https://starfish-app-6lr74.ondigitalocean.app/assessments/welcome/{{ assessment.assessmentName }}<br>
                         <hr>
                         <a href="assessment/{{assessment.assId}}" class="btn btn-primary  btn-block"
                             id="view{{assessment.assId}}">Add Questions.</a>
@@ -45,7 +45,7 @@
     <hr>
     {% for video in video.all reversed %}
     <ul>
-        <a href="https://sophia-f7ra6.ondigitalocean.app/media//{{ video.videoAns }}">
+        <a href="https://starfish-app-6lr74.ondigitalocean.app/media//{{ video.videoAns }}">
             <li>{{ video.user_name }}--{{ video.assessment_name }}</li>
         </a>
     </ul>
