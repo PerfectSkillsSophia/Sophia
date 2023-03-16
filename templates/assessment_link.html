@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<div class="container" style="margin-top: 100px;">
+    <div class="row">
+        <div class="col mx-md-3">
+            <div class="jumbotron" style="background-color: rgba(0, 217, 255, 0.128);">
+                <h2>Welcome to Virtual Interview.</h2>
+                <hr class="my-4">
+                <div style="align-content: flex-start;">
+                    <form>
+                        <label for="username">Enter assessment link!:</label><br>
+                        <input  class="form-control" type="text" id="inputURL" name="inputURL" value=""><br><hr>
+                        <input class="btn btn-primary btn-lg btn-block" type="button" value="Proceed" OnClick="buttonClick()" />
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col" style="margin-top:100px ;">
+
+            <img src="{% static 'image/PSIMG.png' %}" class="img-fluid" alt="Sample image">
+
+        </div>
+    </div>
+    {% endif %}
+    <script language="javascript" type="text/javascript">
+        function buttonClick() {
+            var url = document.getElementById("inputURL").value;
+            window.location = url;
+        }
+    </script>
+
+    {% endblock %}

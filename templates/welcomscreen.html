@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container" style="margin-top: 100px;">
+  <div class="row">
+    <div class="col mx-md-3">
+      <div class="jumbotron" style="background-color: rgba(0, 217, 255, 0.128);">
+        <h2>Welcome to Virtual Interview.</h2>
+        <hr class="my-4">
+        <div style="align-content: flex-start;">
+          <h5>Instructions on how to use the platform.</h5>
+          <ol>
+          <li>Click Start to start your video streaming</li>
+          <li>Click Record to start video recording</li>
+          <li>Click Review to review your recorded answer</li>
+          <li>Click Submit to submit your video assessment</li>
+        </ol>
+        </div>
+        <a class="btn btn-primary btn-block" href="{% url 'answer'%}" role="button">Proceed</a>
+      </div>
+    </div>
+    <div class="col" style="margin-top:100px ;">
+
+        <img src="{% static 'image/PSIMG.png' %}" class="img-fluid"
+          alt="Sample image">
+
+    </div>
+  </div>
+  {% endif %}
+
+  {% endblock %}

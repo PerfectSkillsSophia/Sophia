@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container" style="margin-top:100px">
+<div class="jumbotron"style="margin-top: 100px; background-color: rgba(0, 217, 255, 0.128);">
+
+  <div class="row">
+    {% for video in result.all %}
+    <div class="col-7">
+
+          <video width="320" height="240" controls>
+            <source src="https://sophia-f7ra6.ondigitalocean.app/media//{{ video.videoAns }}" type="video/webm">
+          </video>
+        </div>
+    <div class="col-5">
+      <h4>Recorded Answer In Text.</h4>
+      {% if video.trasnscript %}
+      <p>"{{ video.trasnscript }}"</p>
+      {% else %}
+      <p>"Trasnscript is not yet genereted"</p>
+      <a href="{% url 'generate_transcript' ansId=video.ansId %}" class="btn btn-primary btn-block">Generate
+        Trascript</a>
+      {% endif %}
+
+      <hr>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+</div>
+
+{% endblock %}
