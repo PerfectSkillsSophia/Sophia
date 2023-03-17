@@ -170,6 +170,10 @@ recordButton.addEventListener('click', () => {
 
 //play button
 playButton.addEventListener('click', () => {
+  playButton.disabled = true
+  uploadButton.disabled = true
+  startButton.disabled = true
+  recordButton.disabled = true
   const superBuffer = new Blob(recordedBlobs, { type: 'video/webm' });
   recordedVideo.src = null;
   recordedVideo.srcObject = null;
@@ -179,6 +183,8 @@ playButton.addEventListener('click', () => {
   startButton.disabled = true
   recordButton.disabled = true
   gum.disabled = true
+  setTimeout(myFunction, 5000);
+  uploadButton.disabled = false
 });
 
 //csrf
@@ -197,7 +203,7 @@ function getCookie(name) {
   }
   return cookieValue;
 }
-
+let ass_name = document.getElementById("assname").innerHTML;
 //upload func
 uploadButton.addEventListener('click', () => {
   document.getElementById("exit").style.visibility = "visible";
@@ -208,6 +214,7 @@ uploadButton.addEventListener('click', () => {
   const blob = new Blob(recordedBlobs, { type: 'video/mp4' });
   const fd = new FormData();
   fd.append('data', blob);
+  fd.append('ass_name',ass_name)
   $.ajax({
     type: 'POST',
     url: 'fileUpload/',

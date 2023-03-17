@@ -34,12 +34,14 @@ def fileUpload(request):
         
         fileName = request.user
         video = request.FILES.get('data')
+        assessment_name = request.POST.get('ass_name')
 
         videoAns.objects.create(
             user_name=fileName,
+            assessment_name=assessment_name,
             videoAns=video,)
 
-        return redirect('login')
+        return redirect(request.path)
 
 @login_required(login_url='login')
 def feedback(request):
