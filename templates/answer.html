@@ -164,14 +164,12 @@ recordButton.addEventListener('click', () => {
     stopRecording()
     recordButton.textContent = 'Record'
     playButton.disabled = false
-    uploadButton.disabled = false
+    uploadButton.disabled = True
   }
 });
 
 //play button
 playButton.addEventListener('click', () => {
-  playButton.disabled = true
-  uploadButton.disabled = true
   startButton.disabled = true
   recordButton.disabled = true
   const superBuffer = new Blob(recordedBlobs, { type: 'video/webm' });
