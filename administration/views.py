@@ -7,7 +7,7 @@ from assessments.models import *
 from administration.models import *
 from django.urls import reverse
 from django.db.models import Q
-
+from sophia import settings
 
 @staff_member_required
 @login_required(login_url='login')
@@ -19,8 +19,9 @@ def dashboard(request):
 @staff_member_required
 @login_required(login_url='login')
 def allAnswer(request):
+	url =settings. MEDIA_URL
 	video = videoAns.objects.all()
-	return render(request, 'all_submmision.html',{'video':video})
+	return render(request, 'all_submmision.html',{'video':video,'url':url})
 
 @staff_member_required
 @login_required(login_url='login')
@@ -55,6 +56,7 @@ def add_assessment(request):
 @staff_member_required
 @login_required(login_url='login')
 def view_assessments(request,ass_id):
+	
 	ass_id = ass_id
 	assessment = allAssessment.objects.filter(assId=ass_id)
 	allque = allAssessment.objects.get(assId=ass_id).question_set.all()[:5]
@@ -76,10 +78,11 @@ def Add_question(request):
 		return HttpResponseRedirect(reverse("view", args=(ass_id,)))
 ## ebb5f4cc42d841d0aa7369f975d9af42
 def view_analysis (request,ansId):
+	url =settings. MEDIA_URL
 	result = videoAns.objects.filter(ansId=ansId)
 
 
-	return render(request, "analysis.html",{"result":result})
+	return render(request, "analysis.html",{"result":result,'url':url})
 	
 
 @staff_member_required

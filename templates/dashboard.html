@@ -40,15 +40,5 @@
         {% endfor %}
     </div>
 </div>
-<div class="container" style="margin-top:20px;">
-    <h3>Recent Submissions</h3>
-    <hr>
-    {% for video in video.all reversed %}
-    <ul>
-        <a href="https://starfish-app-6lr74.ondigitalocean.app/media//{{ video.videoAns }}">
-            <li>{{ video.user_name }}--{{ video.assessment_name }}</li>
-        </a>
-    </ul>
-    {% endfor %}
-</div>
+
 {% endblock %}

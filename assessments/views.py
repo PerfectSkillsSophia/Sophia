@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect , HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_page
 
@@ -41,7 +41,7 @@ def fileUpload(request):
             assessment_name=assessment_name,
             videoAns=video,)
 
-        return redirect(request.path)
+        return HttpResponse(status=200)
 
 @login_required(login_url='login')
 def feedback(request):
