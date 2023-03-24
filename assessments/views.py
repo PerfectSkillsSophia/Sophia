@@ -1,23 +1,19 @@
 from django.shortcuts import render, redirect , HttpResponse
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.cache import cache_page
-
 from assessments.models import videoAns,Feedback
 from administration.models import allAssessment
 
 # Create your views here.
-
+## View For Enter link for Assessment link.
+@login_required(login_url='login')
+def afterlogin(request):
+	return render(request,'assessment_link.html')
 
 @login_required(login_url='login')
 def welcomeScreen(request,ass_name):
     global slug 
     slug = ass_name
     return render(request, 'welcomscreen.html')
-
-## View For Enter link for Assessment link.
-@login_required(login_url='login')
-def afterlogin(request):
-	return render(request,'assessment_link.html')
 
 @login_required(login_url='login')
 def answer(request):
