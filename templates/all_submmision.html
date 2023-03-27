@@ -31,7 +31,7 @@
 
 
             {% for result in results %}
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 18rem; margin: 5px 5px 5px 5px;">
                 <video controls src="{{ url }}{{ result.videoAns }}" type="video/webm"></video>
                 <div class="card-body">
                     <h5 class="card-title">User Name : {{ result.user_name }}</h5>
@@ -51,7 +51,7 @@
     <div class="container " style="margin-top: 5px;">
         <div class="row">
             {% for video in video.all reversed %}
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 18rem; margin: 5px 5px 5px 5px;">
                 <video controls src="{{ url }}{{ video.videoAns }}" type="video/webm"></video>
                 <div class="card-body">
                     <h5 class="card-title">User Name : {{ video.user_name }}</h5>
