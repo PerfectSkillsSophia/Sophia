@@ -2,19 +2,31 @@
 {% load static %}
 
 {% block content %}
-<div class="container" style="margin-top:100px">
-<div class="jumbotron"style="margin-top: 100px; background-color: rgba(0, 217, 255, 0.128);">
+{% for video in result.all %}
+<section class="vh-100" style="background-color: rgb(255, 255, 255);margin-top: 50px;">
+  {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show text-center" role="alert">
+
+        <strong>{{ message }}</strong>
+
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+  <div class="container h-100" style="margin-top: 5px;">
+  
 
   <div class="row">
-    {% for video in result.all %}
-    <div class="col-7">
-
-          <video width="320" height="240" controls>
-            <source src="{{ url }}{{ video.videoAns }}" type="video/webm">
-          </video>
-        </div>
-    <div class="col-5">
-      <h4>Recorded Answer In Text.</h4>
+    <div class="col-md-6">
+      <video width="100%" controls>
+        <source src="{{ url }}{{ video.videoAns }}" type="video/webm">
+      </video>
+    </div>
+    <div class="col-md-6">
+      <h4>Answer from video which is submitted.</h4>
       {% if video.trasnscript %}
       <p>"{{ video.trasnscript }}"</p>
       {% else %}
@@ -23,11 +35,42 @@
         Trascript</a>
       {% endif %}
 
-      <hr>
     </div>
-    {% endfor %}
+  </div>
+  
+</div>
+</section>
+
+<section class="vh-100" style="background-color: rgb(255, 255, 255);margin-top: 50px;">
+  <div class="container h-100" style="margin-top: 5px;">
+  <div class="card text-center">
+    {% if video.answer_accurecy %}
+    <div class="card-header">
+      Accuracy of Answer is: {{ video.answer_accurecy }} %
+      Featured
+    </div>
+    {% else %}
+    <div class="card-header">
+Result is not yet generated plese enter expected answer and submit to generate result
+    </div>
+    {% endif %}
+    <div class="card-body">
+      <form  action="{% url 'generate result' %}">
+      <div class="form-group">
+        <select class="form-control" name="ansId" id="ansId">
+        <option value="{{ video.ansId }}">UserName:{{ video.user_name }}</option>
+      </select>
+      </div>
+        <div class="form-group">
+        <label for="exampleFormControlTextarea1">Enter Expected Answer</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="expected_answer" type="expected_answer" placeholder="Expected Answer"></textarea>
+      </div>
+      <button class="btn btn-primary btn-block my-2 my-sm-0" type="submit">Generate Result</button>
+    </form>
+    </div>
   </div>
 </div>
-</div>
+</section>
+{% endfor %}
 
 {% endblock %}

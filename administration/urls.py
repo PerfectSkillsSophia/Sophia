@@ -7,6 +7,7 @@ urlpatterns = [
     path('dashboard/',dashboard,name='dashboard'),
     path('allAnswer/',allAnswer,name='allAnswer'),
     path('searchbar/',searchbar,name='searchbar'),
+    path('generateresult/',generate_result,name='generate result'),
     path('addassessment/Add',Add_assessment,name='Add'),
     path('dashboard/assessment/<int:ass_id>/',view_assessments,name='view'),
     path('allAnswer/<int:ansId>/',view_analysis,name='view_analysis'),

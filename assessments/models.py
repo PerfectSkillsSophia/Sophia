@@ -9,6 +9,7 @@ class videoAns(models.Model):
     assessment_name = models.CharField(max_length=300,null=True)
     videoAns = models.FileField(upload_to='media',blank=True)
     trasnscript = models.CharField(max_length=10000,null=True)
+    answer_accurecy = models.IntegerField(null=True,default=0)
     
 
     def __str__(self):

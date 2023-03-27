@@ -8,6 +8,7 @@ from administration.models import *
 from django.urls import reverse
 from django.db.models import Q
 from sophia import settings
+from thefuzz import fuzz,process
 
 @staff_member_required
 @login_required(login_url='login')
@@ -27,11 +28,12 @@ def allAnswer(request):
 @login_required(login_url='login')
 def searchbar(request):
 	query = request.GET.get('q')
+	url =settings. MEDIA_URL
 	if query:
 		results = videoAns.objects.filter(Q(user_name__icontains=query) | Q(assessment_name__icontains=query))
 	else:
 		results = videoAns.objects.all()
-	return render(request, 'all_submmision.html', {'results': results, 'query': query})
+	return render(request, 'all_submmision.html', {'results': results, 'query': query,'url':url})
 	
 	
 @staff_member_required
@@ -88,6 +90,7 @@ def view_analysis (request,ansId):
 @staff_member_required
 @login_required(login_url='login')
 def generate_tras(request,ansId):
+	ref_url = request.META.get('HTTP_REFERER')
 	result = videoAns.objects.get(ansId=ansId)
 	vf = result.videoAns.path
 	import requests
@@ -136,4 +139,43 @@ def generate_tras(request,ansId):
 	result.trasnscript = json_str3["text"]
 	result.save()
 	messages.success(request, 'Transcript is generated Successfully.')
-	return redirect('allAnswer')    		
+	return HttpResponseRedirect(ref_url)    		
+
+def generate_result(request):
+	if request.method == 'GET':
+		ansId = request.GET.get('ansId')
+		expected_answer=request.GET.get('expected_answer')
+		s2 = expected_answer
+		ref_url = request.META.get('HTTP_REFERER')
+		answer=videoAns.objects.filter(ansId=ansId)
+		for trans in answer:
+			s1 = trans.trasnscript
+	
+		print(s2)
+		print(s1)
+		print(ansId)
+
+		if fuzz.partial_token_sort_ratio(s1,s2)==100:
+			Percent_ratio=100
+		elif fuzz.partial_token_sort_ratio(s1,s2)!=100 and fuzz.token_sort_ratio(s1,s2)!=100 and fuzz.token_set_ratio(s1,s2)!=100 and fuzz.partial_ratio(s1,s2)!=100:
+			Percent_ratio=max(fuzz.partial_token_sort_ratio(s1,s2),fuzz.token_sort_ratio(s1,s2),fuzz.token_set_ratio(s1,s2),fuzz.partial_ratio(s1,s2))
+		else:
+			Percent_ratio=((fuzz.partial_token_sort_ratio(s1,s2)+fuzz.token_sort_ratio(s1,s2)+fuzz.token_set_ratio(s1,s2)+fuzz.partial_ratio(s1,s2))/400)*100
+		answer=videoAns.objects.get(ansId=ansId)
+		answer.answer_accurecy=Percent_ratio
+		print("Accuracy of Answer is: ",Percent_ratio,"%")
+		print(type(int(Percent_ratio)))
+		answer.save()
+
+		return HttpResponseRedirect(ref_url)
+
+
+
+
+
+
+
+    
+
+
+	
